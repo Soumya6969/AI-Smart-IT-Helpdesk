@@ -1,73 +1,347 @@
-body{
+/* =========================================
+            GOOGLE FONT
+========================================= */
 
-    background:#f4f6f9;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+font-family:'Poppins',sans-serif;
 
 }
 
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+background:
+radial-gradient(circle at top left,#172554,#0f172a 40%,#020617);
+
+color:white;
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+/* =========================================
+                NAVBAR
+========================================= */
+
 .navbar{
 
-    padding:15px;
+background:rgba(15,23,42,.75)!important;
+
+backdrop-filter:blur(16px);
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+padding:18px;
 
 }
 
 .navbar-brand{
 
-    font-size:24px;
+font-size:28px;
 
-    font-weight:bold;
+font-weight:700;
+
+letter-spacing:.5px;
 
 }
 
 .nav-link{
 
-    margin-left:12px;
+color:#ffffff!important;
 
-    font-size:17px;
+font-size:16px;
+
+margin-left:18px;
+
+transition:.3s;
 
 }
 
 .nav-link:hover{
 
-    color:yellow !important;
+color:#60A5FA!important;
+
+transform:translateY(-2px);
+
+}
+/* =========================================
+                HERO
+========================================= */
+
+.hero-section{
+
+padding:90px 0;
 
 }
 
-.display-3{
+.hero-title{
 
-    font-weight:bold;
+font-size:70px;
 
-}
+font-weight:800;
 
-.card{
-
-    border:none;
-
-    border-radius:15px;
-
-    transition:0.3s;
+line-height:1.1;
 
 }
 
-.card:hover{
+.gradient-text{
 
-    transform:translateY(-8px);
+background:linear-gradient(90deg,#38BDF8,#8B5CF6);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+.hero-subtitle{
+
+font-size:20px;
+
+margin-top:25px;
+
+color:#CBD5E1;
+
+line-height:1.8;
+
+}
+/* =========================================
+                BUTTONS
+========================================= */
+
+.btn-primary{
+
+background:linear-gradient(90deg,#2563EB,#7C3AED);
+
+border:none;
+
+padding:14px 34px;
+
+border-radius:50px;
+
+transition:.4s;
+
+font-weight:600;
 
 }
 
-.card h2{
+.btn-primary:hover{
 
-    font-size:45px;
+transform:translateY(-5px);
+
+box-shadow:0 0 35px rgba(59,130,246,.5);
 
 }
+
+.btn-outline-light{
+
+border-radius:50px;
+
+padding:14px 34px;
+
+}
+/* =========================================
+            FEATURE CARDS
+========================================= */
+
+.feature-card{
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:22px;
+
+transition:.4s;
+
+overflow:hidden;
+
+}
+
+.feature-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 0 30px rgba(59,130,246,.25);
+
+}
+
+.feature-card i{
+
+font-size:55px;
+
+background:linear-gradient(90deg,#38BDF8,#8B5CF6);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+.feature-card h4{
+
+margin-top:20px;
+
+font-weight:700;
+
+}
+
+.feature-card p{
+
+margin-top:12px;
+
+color:#CBD5E1;
+
+}
+/* =========================================
+                STATS
+========================================= */
+
+.stats{
+
+margin-top:90px;
+
+padding:50px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(15px);
+
+}
+
+.stats h2{
+
+font-size:48px;
+
+font-weight:700;
+
+color:#38BDF8;
+
+}
+
+.stats p{
+
+color:#CBD5E1;
+
+}
+/* =========================================
+                CTA
+========================================= */
+
+.cta-section{
+
+margin-top:100px;
+
+padding:70px;
+
+background:linear-gradient(90deg,#1E3A8A,#6D28D9);
+
+border-radius:30px;
+
+}
+
+.cta-section h2{
+
+font-size:40px;
+
+font-weight:700;
+
+}
+
+.cta-section p{
+
+margin:20px 0;
+
+font-size:18px;
+
+}
+/* =========================================
+                FOOTER
+========================================= */
 
 footer{
 
-    margin-top:80px;
+margin-top:120px;
+
+background:#020617;
+
+padding:40px 0;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+footer p{
+
+color:#94A3B8;
+
+}
+/* =========================================
+            RESPONSIVE
+========================================= */
+
+@media(max-width:992px){
+
+.hero-title{
+
+font-size:50px;
+
+}
+
+.hero-subtitle{
+
+font-size:18px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.hero-title{
+
+font-size:38px;
+
+text-align:center;
+
+}
+
+.hero-subtitle{
+
+text-align:center;
+
+}
+
+.hero-section{
+
+text-align:center;
 
 }
 
 .btn{
 
-    padding:12px 30px;
+margin-top:15px;
+
+}
 
 }
