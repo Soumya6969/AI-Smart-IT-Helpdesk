@@ -84,6 +84,37 @@ transform:translateY(-2px);
                 HERO
 ========================================= */
 
+/* HERO BADGE */
+
+.hero-badge{
+
+display:inline-block;
+
+padding:10px 20px;
+
+border-radius:40px;
+
+background:rgba(59,130,246,.12);
+
+border:1px solid rgba(59,130,246,.3);
+
+margin-bottom:30px;
+
+backdrop-filter:blur(10px);
+
+}
+
+.hero-badge span{
+
+font-size:14px;
+
+font-weight:600;
+
+color:#60A5FA;
+
+letter-spacing:.5px;
+
+}
 .hero-section{
 
 padding:90px 0;
@@ -178,9 +209,9 @@ overflow:hidden;
 
 .feature-card:hover{
 
-transform:translateY(-10px);
+transform:translateY(-12px) scale(1.03);
 
-box-shadow:0 0 30px rgba(59,130,246,.25);
+box-shadow:0 0 35px #33476859;
 
 }
 
@@ -248,34 +279,47 @@ color:#CBD5E1;
                 CTA
 ========================================= */
 
-.cta-section{
+/* PREMIUM CTA */
+
+.premium-cta{
 
 margin-top:100px;
 
-padding:70px;
-
-background:linear-gradient(90deg,#1E3A8A,#6D28D9);
+padding:80px;
 
 border-radius:30px;
 
+text-align:center;
+
+background:
+
+linear-gradient(
+
+135deg,
+
+rgba(37,99,235,.9),
+
+rgba(124,58,237,.9)
+
+);
+
 }
 
-.cta-section h2{
+.premium-cta h2{
 
-font-size:40px;
+font-size:42px;
 
 font-weight:700;
 
 }
 
-.cta-section p{
+.premium-cta p{
 
-margin:20px 0;
+margin-top:20px;
 
-font-size:18px;
+color:#E2E8F0;
 
-}
-/* =========================================
+}/* =========================================
                 FOOTER
 ========================================= */
 
@@ -341,6 +385,151 @@ text-align:center;
 .btn{
 
 margin-top:15px;
+
+}
+
+}
+/* WHY US */
+
+.why-us{
+
+margin-top:90px;
+
+}
+
+.why-box{
+
+padding:35px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,.04);
+
+transition:.4s;
+
+height:100%;
+
+}
+
+.why-box:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 0 25px rgba(59,130,246,.3);
+
+}
+
+.why-box i{
+
+font-size:45px;
+
+color:#38BDF8;
+
+}
+
+.why-box h4{
+
+margin-top:20px;
+
+}
+
+.why-box p{
+
+color:#CBD5E1;
+
+margin-top:15px;
+
+}
+/* ============================
+      MOBILE RESPONSIVE
+============================= */
+
+@media (max-width:991px){
+
+.hero-section{
+
+padding:60px 20px;
+
+text-align:center;
+
+}
+
+.hero-title{
+
+font-size:42px;
+
+}
+
+.hero-subtitle{
+
+font-size:18px;
+
+}
+
+.navbar-brand{
+
+font-size:20px;
+
+}
+
+.feature-card{
+
+margin-bottom:20px;
+
+}
+
+.stats{
+
+padding:30px 15px;
+
+}
+
+.premium-cta{
+
+padding:40px 20px;
+
+}
+
+footer{
+
+text-align:center;
+
+}
+
+}
+
+
+@media (max-width:576px){
+
+.hero-title{
+
+font-size:32px;
+
+}
+
+.hero-subtitle{
+
+font-size:16px;
+
+}
+
+.btn{
+
+width:100%;
+
+margin-top:15px;
+
+}
+
+.btn + .btn{
+
+margin-left:0 !important;
+
+}
+
+.premium-cta h2{
+
+font-size:28px;
 
 }
 
