@@ -1,0 +1,118 @@
+{% extends 'helpdesk/base.html' %}
+
+{% block title %}
+Admin Dashboard
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+👨‍💼 Admin Dashboard
+</h2>
+
+<div class="row mb-4">
+
+    <div class="col-md-3">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5>Total Tickets</h5>
+                <h2>{{ total_tickets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5>Open</h5>
+                <h2>{{ open_tickets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-warning">
+            <div class="card-body">
+                <h5>In Progress</h5>
+                <h2>{{ progress_tickets }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card bg-danger text-white">
+            <div class="card-body">
+                <h5>Closed</h5>
+                <h2>{{ closed_tickets }}</h2>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card shadow">
+
+    <div class="card-header bg-dark text-white">
+
+        All Tickets
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-hover">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Subject</th>
+                    <th>Priority</th>
+                    <th>Status</th>
+                    <th>Created</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for ticket in tickets %}
+
+                <tr>
+
+                    <td>HD-{{ ticket.id }}</td>
+
+                    <td>{{ ticket.user.username }}</td>
+
+                    <td>
+
+                <a href="{% url 'admin_ticket_detail' ticket.id %}">
+
+{{ ticket.subject }}
+
+                </a>
+
+                    </td>
+
+                    <td>{{ ticket.priority }}</td>
+
+                    <td>{{ ticket.status }}</td>
+
+                    <td>{{ ticket.created_at|date:"d M Y" }}</td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

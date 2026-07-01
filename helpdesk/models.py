@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 class Ticket(models.Model):
 
@@ -14,9 +16,10 @@ class Ticket(models.Model):
         ('High', 'High'),
     ]
 
-    name = models.CharField(max_length=100)
-
-    email = models.EmailField()
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
 
     subject = models.CharField(max_length=200)
 

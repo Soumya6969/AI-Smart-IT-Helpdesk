@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Ticket
 
 
 class RegisterForm(forms.ModelForm):
@@ -71,3 +72,35 @@ class RegisterForm(forms.ModelForm):
             )
 
         return cleaned_data
+class TicketForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Ticket
+
+        fields = [
+
+            'subject',
+            'description',
+            'priority'
+
+        ]
+
+        widgets = {
+
+            'subject': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ticket Subject'
+            }),
+
+            'description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 5,
+                'placeholder': 'Describe your problem'
+            }),
+
+            'priority': forms.Select(attrs={
+                'class': 'form-control'
+            }),
+
+        }

@@ -1,0 +1,95 @@
+{% extends 'helpdesk/base.html' %}
+
+{% block title %}
+My Tickets
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2 class="mb-4">
+        📋 My Support Tickets
+    </h2>
+
+    {% if tickets %}
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Subject</th>
+
+                <th>Priority</th>
+
+                <th>Status</th>
+
+                <th>Created</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for ticket in tickets %}
+
+            <tr>
+
+                <td>
+                    HD-{{ ticket.id }}
+                </td>
+
+                <td>
+
+                <a href="{% url 'ticket_detail' ticket.id %}">
+
+                    {{ ticket.subject }}
+
+                </a>
+
+                </td>
+
+                <td>
+
+                    {{ ticket.priority }}
+
+                </td>
+
+                <td>
+
+                    {{ ticket.status }}
+
+                </td>
+
+                <td>
+
+                    {{ ticket.created_at|date:"d M Y H:i" }}
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <div class="alert alert-info">
+
+        No tickets found.
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
