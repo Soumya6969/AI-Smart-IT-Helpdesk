@@ -7,41 +7,41 @@ Admin Dashboard
 {% block content %}
 
 <h2 class="mb-4">
-👨‍💼 Admin Dashboard
+    👨‍💼 Admin Dashboard
 </h2>
 
 <div class="row mb-4">
 
-    <div class="col-md-3">
-        <div class="card bg-primary text-white">
-            <div class="card-body">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-primary text-white shadow-sm">
+            <div class="card-body text-center">
                 <h5>Total Tickets</h5>
                 <h2>{{ total_tickets }}</h2>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card bg-success text-white">
-            <div class="card-body">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-success text-white shadow-sm">
+            <div class="card-body text-center">
                 <h5>Open</h5>
                 <h2>{{ open_tickets }}</h2>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card bg-warning">
-            <div class="card-body">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-warning shadow-sm">
+            <div class="card-body text-center">
                 <h5>In Progress</h5>
                 <h2>{{ progress_tickets }}</h2>
             </div>
         </div>
     </div>
 
-    <div class="col-md-3">
-        <div class="card bg-danger text-white">
-            <div class="card-body">
+    <div class="col-md-3 mb-3">
+        <div class="card bg-danger text-white shadow-sm">
+            <div class="card-body text-center">
                 <h5>Closed</h5>
                 <h2>{{ closed_tickets }}</h2>
             </div>
@@ -52,64 +52,214 @@ Admin Dashboard
 
 <div class="card shadow">
 
-    <div class="card-header bg-dark text-white">
+    <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
 
-        All Tickets
+        <span>All Tickets</span>
+        <form method="GET" class="row g-2">
+
+    <div class="col-auto">
+
+        <input
+            type="text"
+            name="search"
+            class="form-control"
+            placeholder="Search..."
+            value="{{ search_query }}"
+        >
+
+    </div>
+
+    <div class="col-auto">
+
+        <select
+            name="status"
+            class="form-select"
+        >
+
+            <option value="">All Status</option>
+
+            <option value="Open"
+            {% if status_filter == "Open" %}
+            selected
+            {% endif %}
+            >
+            Open
+            </option>
+
+            <option value="In Progress"
+            {% if status_filter == "In Progress" %}
+            selected
+            {% endif %}
+            >
+            In Progress
+            </option>
+
+            <option value="Closed"
+            {% if status_filter == "Closed" %}
+            selected
+            {% endif %}
+            >
+            Closed
+            </option>
+
+        </select>
+
+    </div>
+    <div class="col-auto">
+
+    <select name="priority" class="form-select">
+
+        <option value="">All Priority</option>
+
+        <option value="Low"
+            {% if priority_filter == "Low" %}
+                selected
+            {% endif %}
+        >
+            Low
+        </option>
+
+        <option value="Medium"
+            {% if priority_filter == "Medium" %}
+                selected
+            {% endif %}
+        >
+            Medium
+        </option>
+
+        <option value="High"
+            {% if priority_filter == "High" %}
+                selected
+            {% endif %}
+        >
+            High
+        </option>
+
+    </select>
+</div>
+
+    <div class="col-auto">
+
+        <button
+            class="btn btn-success"
+            type="submit"
+        >
+            Search
+        </button>
+
+    </div>
+
+    <div class="col-auto">
+
+        <a
+            href="{% url 'admin_dashboard' %}"
+            class="btn btn-secondary"
+        >
+            Reset
+        </a>
+
+    </div>
 
     </div>
 
     <div class="card-body">
 
-        <table class="table table-hover">
+        <div class="table-responsive">
 
-            <thead>
+            <table class="table table-hover table-bordered align-middle">
 
-                <tr>
+                <thead class="table-dark">
 
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Subject</th>
-                    <th>Priority</th>
-                    <th>Status</th>
-                    <th>Created</th>
+                    <tr>
+                        <th>ID</th>
+                        <th>User</th>
+                        <th>Subject</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                    </tr>
 
-                </tr>
+                </thead>
 
-            </thead>
+                <tbody>
 
-            <tbody>
+                {% for ticket in tickets %}
 
-            {% for ticket in tickets %}
+                    <tr>
 
-                <tr>
+                        <td>HD-{{ ticket.id }}</td>
 
-                    <td>HD-{{ ticket.id }}</td>
+                        <td>{{ ticket.user.username }}</td>
 
-                    <td>{{ ticket.user.username }}</td>
+                        <td>
+                            <a href="{% url 'admin_ticket_detail' ticket.id %}">
+                                {{ ticket.subject }}
+                            </a>
+                        </td>
 
-                    <td>
+                        <td>
 
-                <a href="{% url 'admin_ticket_detail' ticket.id %}">
+                            {% if ticket.priority == "High" %}
+                                <span class="badge bg-danger">
+                                    {{ ticket.priority }}
+                                </span>
 
-{{ ticket.subject }}
+                            {% elif ticket.priority == "Medium" %}
+                                <span class="badge bg-warning text-dark">
+                                    {{ ticket.priority }}
+                                </span>
 
-                </a>
+                            {% else %}
+                                <span class="badge bg-success">
+                                    {{ ticket.priority }}
+                                </span>
+                            {% endif %}
 
-                    </td>
+                        </td>
 
-                    <td>{{ ticket.priority }}</td>
+                        <td>
 
-                    <td>{{ ticket.status }}</td>
+                            {% if ticket.status == "Open" %}
+                                <span class="badge bg-success">
+                                    {{ ticket.status }}
+                                </span>
 
-                    <td>{{ ticket.created_at|date:"d M Y" }}</td>
+                            {% elif ticket.status == "In Progress" %}
+                                <span class="badge bg-warning text-dark">
+                                    {{ ticket.status }}
+                                </span>
 
-                </tr>
+                            {% else %}
+                                <span class="badge bg-danger">
+                                    {{ ticket.status }}
+                                </span>
+                            {% endif %}
 
-            {% endfor %}
+                        </td>
 
-            </tbody>
+                        <td>{{ ticket.created_at|date:"d M Y" }}</td>
 
-        </table>
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+
+                        <td colspan="6" class="text-center text-muted py-4">
+
+                            No tickets found.
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 

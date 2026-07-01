@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Ticket
 from django.contrib.admin.views.decorators import staff_member_required
+from django.db.models import Q
 
 def home(request):
     return render(request, "helpdesk/helpdesk.html")
@@ -280,19 +281,35 @@ def close_ticket(request, ticket_id):
 @staff_member_required(login_url='login')
 def admin_dashboard(request):
 
-    tickets = Ticket.objects.all().order_by('-created_at')
+    search_query = request.GET.get("search", "").strip()
+    status_filter = request.GET.get("status", "").strip()
+    priority_filter = request.GET.get("priority", "").strip()
 
-    total_tickets = tickets.count()
-    open_tickets = tickets.filter(status="Open").count()
-    progress_tickets = tickets.filter(status="In Progress").count()
-    closed_tickets = tickets.filter(status="Closed").count()
+    tickets = Ticket.objects.all().order_by("-created_at")
+
+    if search_query:
+        tickets = tickets.filter(
+            Q(subject__icontains=search_query) |
+            Q(user__username__icontains=search_query)
+        )
+
+    if status_filter:
+        tickets = tickets.filter(status=status_filter)
+
+    if priority_filter:
+        tickets = tickets.filter(priority=priority_filter)
 
     context = {
         "tickets": tickets,
-        "total_tickets": total_tickets,
-        "open_tickets": open_tickets,
-        "progress_tickets": progress_tickets,
-        "closed_tickets": closed_tickets,
+
+        "search_query": search_query,
+        "status_filter": status_filter,
+        "priority_filter": priority_filter,
+
+        "total_tickets": Ticket.objects.count(),
+        "open_tickets": Ticket.objects.filter(status="Open").count(),
+        "progress_tickets": Ticket.objects.filter(status="In Progress").count(),
+        "closed_tickets": Ticket.objects.filter(status="Closed").count(),
     }
 
     return render(
