@@ -79,11 +79,8 @@ class TicketForm(forms.ModelForm):
         model = Ticket
 
         fields = [
-
             'subject',
-            'description',
-            'priority'
-
+            'description'
         ]
 
         widgets = {
@@ -97,10 +94,6 @@ class TicketForm(forms.ModelForm):
                 'class': 'form-control',
                 'rows': 5,
                 'placeholder': 'Describe your problem'
-            }),
-
-            'priority': forms.Select(attrs={
-                'class': 'form-control'
             }),
 
         }

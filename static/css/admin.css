@@ -1,0 +1,1265 @@
+/*======================================================
+        ADMIN DASHBOARD CSS - PART 1
+======================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+.dashboard-wrapper{
+    padding:30px 15px 60px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.dashboard-header{
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:28px;
+    padding:40px;
+    position:relative;
+    overflow:hidden;
+}
+
+.dashboard-header::before{
+    content:"";
+    position:absolute;
+    width:300px;
+    height:300px;
+    background:rgba(59,130,246,.15);
+    border-radius:50%;
+    top:-150px;
+    right:-120px;
+    filter:blur(60px);
+}
+
+.dashboard-header::after{
+    content:"";
+    position:absolute;
+    width:220px;
+    height:220px;
+    background:rgba(124,58,237,.15);
+    border-radius:50%;
+    bottom:-120px;
+    left:-100px;
+    filter:blur(60px);
+}
+
+.dashboard-badge{
+    display:inline-block;
+    padding:10px 20px;
+    border-radius:50px;
+    background:rgba(59,130,246,.12);
+    border:1px solid rgba(96,165,250,.35);
+    color:#60A5FA;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:1px;
+}
+
+.dashboard-title{
+    font-size:52px;
+    font-weight:800;
+    color:#fff;
+    margin-top:18px;
+    margin-bottom:12px;
+}
+
+.dashboard-subtitle{
+    color:#CBD5E1;
+    font-size:17px;
+    line-height:1.8;
+    max-width:650px;
+    margin-bottom:0;
+}
+
+/* =========================
+   ADMIN PROFILE
+========================= */
+
+.admin-profile{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    padding:24px;
+    backdrop-filter:blur(15px);
+}
+
+.admin-avatar{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:34px;
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    );
+    box-shadow:0 15px 35px rgba(37,99,235,.35);
+}
+
+.admin-profile h5{
+    color:#fff;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+.admin-profile span{
+    color:#CBD5E1;
+    font-size:14px;
+}
+
+/* =========================
+   SEARCH SECTION
+========================= */
+
+.search-section{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:25px;
+    backdrop-filter:blur(15px);
+}
+
+.search-box{
+    position:relative;
+}
+
+.search-box i{
+    position:absolute;
+    top:50%;
+    left:22px;
+    transform:translateY(-50%);
+    color:#94A3B8;
+    font-size:18px;
+}
+
+.search-box .form-control{
+    height:62px;
+    border:none;
+    border-radius:50px;
+    background:rgba(255,255,255,.08);
+    color:#fff;
+    padding-left:55px;
+    font-size:15px;
+}
+
+.search-box .form-control:focus{
+    background:rgba(255,255,255,.10);
+    color:#fff;
+    box-shadow:none;
+    border:none;
+}
+
+.search-box .form-control::placeholder{
+    color:#94A3B8;
+}
+
+.new-ticket-btn{
+    height:62px;
+    border:none;
+    border-radius:50px;
+    background:linear-gradient(
+        135deg,
+        #2563EB,
+        #7C3AED
+    );
+    font-weight:600;
+    font-size:15px;
+    transition:.35s;
+}
+
+.new-ticket-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 35px rgba(37,99,235,.35);
+}
+
+/* =========================
+   STATS CARDS
+========================= */
+
+.stats-card{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+    padding:28px;
+    backdrop-filter:blur(15px);
+    transition:.35s;
+    position:relative;
+    overflow:hidden;
+    height:100%;
+}
+
+.stats-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+
+.stats-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.stats-top span{
+    color:#CBD5E1;
+    font-size:14px;
+    font-weight:500;
+}
+
+.stats-top h2{
+    color:#fff;
+    font-size:42px;
+    font-weight:700;
+    margin-top:10px;
+    margin-bottom:0;
+}
+
+.stats-icon{
+    width:72px;
+    height:72px;
+    border-radius:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    background:rgba(255,255,255,.08);
+}
+
+.stats-bottom{
+    margin-top:18px;
+    color:#94A3B8;
+    font-size:14px;
+}
+
+/* =========================
+   CARD COLORS
+========================= */
+
+.total-card{
+    border-top:4px solid #3B82F6;
+}
+
+.open-card{
+    border-top:4px solid #22C55E;
+}
+
+.progress-card{
+    border-top:4px solid #F59E0B;
+}
+
+.closed-card{
+    border-top:4px solid #EF4444;
+}
+
+/* Glow Effects */
+
+.total-card::before,
+.open-card::before,
+.progress-card::before,
+.closed-card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    right:-50px;
+    top:-50px;
+    filter:blur(35px);
+}
+
+.total-card::before{
+    background:rgba(59,130,246,.25);
+}
+
+.open-card::before{
+    background:rgba(34,197,94,.25);
+}
+
+.progress-card::before{
+    background:rgba(245,158,11,.25);
+}
+
+.closed-card::before{
+    background:rgba(239,68,68,.25);
+}
+/*======================================================
+        ADMIN DASHBOARD CSS - PART 2
+        Filter Panel + Ticket Table
+======================================================*/
+
+/* =========================
+   FILTER PANEL
+========================= */
+
+.filter-card{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    padding:25px;
+
+    backdrop-filter:blur(15px);
+
+    height:100%;
+
+}
+
+.filter-header{
+
+    margin-bottom:25px;
+
+}
+
+.filter-header h5{
+
+    color:#fff;
+
+    font-weight:700;
+
+    margin-bottom:6px;
+
+}
+
+.filter-header p{
+
+    color:#94A3B8;
+
+    font-size:14px;
+
+    margin:0;
+
+}
+
+.filter-card .form-label{
+
+    color:#E2E8F0;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+
+}
+
+.custom-input{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.10);
+
+    color:#fff;
+
+    border-radius:14px;
+
+    height:50px;
+
+}
+
+.custom-input:focus{
+
+    background:rgba(255,255,255,.12);
+
+    color:#fff;
+
+    border-color:#3B82F6;
+
+    box-shadow:0 0 0 .2rem rgba(59,130,246,.20);
+
+}
+
+.custom-input option{
+
+    color:#000;
+
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.filter-btn{
+
+    background:linear-gradient(135deg,#2563EB,#7C3AED);
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:14px;
+
+    height:50px;
+
+    font-weight:600;
+
+    transition:.35s;
+
+}
+
+.filter-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.30);
+
+}
+
+.reset-btn{
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.10);
+
+    border-radius:14px;
+
+    height:50px;
+
+    font-weight:600;
+
+}
+
+.reset-btn:hover{
+
+    background:rgba(255,255,255,.14);
+
+    color:#fff;
+
+}
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.ticket-panel{
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    backdrop-filter:blur(15px);
+
+}
+
+.ticket-panel-header{
+
+    padding:25px 30px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.ticket-panel-header h4{
+
+    color:#fff;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+}
+
+.ticket-panel-header p{
+
+    color:#94A3B8;
+
+    margin:0;
+
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.admin-table{
+
+    margin:0;
+
+    color:#fff;
+
+}
+
+.admin-table thead th{
+
+    background:rgba(255,255,255,.05);
+
+    color:#CBD5E1;
+
+    border:none;
+
+    padding:18px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.admin-table tbody td{
+
+    border-top:1px solid rgba(255,255,255,.05);
+
+    padding:18px;
+
+    vertical-align:middle;
+
+}
+
+.admin-table tbody tr{
+
+    transition:.30s;
+
+}
+
+.admin-table tbody tr:hover{
+
+    background:rgba(255,255,255,.05);
+
+}
+
+/* =========================
+   TICKET ID
+========================= */
+
+.ticket-id{
+
+    display:inline-block;
+
+    background:#2563EB;
+
+    color:#fff;
+
+    padding:8px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* =========================
+   SUBJECT LINK
+========================= */
+
+.ticket-link{
+
+    color:#fff;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.ticket-link:hover{
+
+    color:#60A5FA;
+
+}
+
+/* =========================
+   PRIORITY
+========================= */
+
+.priority-high{
+
+    background:#DC2626;
+
+    color:#fff;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.priority-medium{
+
+    background:#F59E0B;
+
+    color:#fff;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.priority-low{
+
+    background:#16A34A;
+
+    color:#fff;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* =========================
+   STATUS
+========================= */
+
+.status-open{
+
+    background:#22C55E;
+
+    color:#fff;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.status-progress{
+
+    background:#F59E0B;
+
+    color:#fff;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.status-closed{
+
+    background:#EF4444;
+
+    color:#fff;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* =========================
+   CATEGORY
+========================= */
+
+.category-badge{
+
+    background:#0EA5E9;
+
+    color:#fff;
+
+    padding:7px 14px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+/* =========================
+   VIEW BUTTON
+========================= */
+
+.view-btn{
+
+    display:inline-block;
+
+    background:linear-gradient(135deg,#2563EB,#7C3AED);
+
+    color:#fff;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.30s;
+
+}
+
+.view-btn:hover{
+
+    transform:translateY(-2px);
+
+    color:#fff;
+
+    box-shadow:0 10px 20px rgba(37,99,235,.30);
+
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:70px 20px;
+
+}
+
+.empty-icon{
+
+    font-size:70px;
+
+    margin-bottom:20px;
+
+}
+
+.empty-state h4{
+
+    color:#fff;
+
+}
+
+.empty-state p{
+
+    color:#94A3B8;
+
+}
+/*======================================================
+        ADMIN DASHBOARD CSS - PART 3
+        Animation • Responsive • Premium Finish
+======================================================*/
+
+/* =========================
+   FADE ANIMATION
+========================= */
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.dashboard-header{
+
+    animation:fadeUp .6s ease;
+
+}
+
+.search-section{
+
+    animation:fadeUp .8s ease;
+
+}
+
+.stats-card{
+
+    animation:fadeUp 1s ease;
+
+}
+
+.filter-card{
+
+    animation:fadeUp 1.1s ease;
+
+}
+
+.ticket-panel{
+
+    animation:fadeUp 1.2s ease;
+
+}
+
+/* =========================
+   CUSTOM SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#0F172A;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#3B82F6;
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:#2563EB;
+
+}
+
+/* =========================
+   TABLE STRIPES
+========================= */
+
+.admin-table tbody tr:nth-child(even){
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.admin-table tbody tr:nth-child(odd){
+
+    background:transparent;
+
+}
+
+/* =========================
+   SMALL TEXT
+========================= */
+
+.admin-table small{
+
+    color:#94A3B8;
+
+}
+
+/* =========================
+   HOVER EFFECTS
+========================= */
+
+.stats-card,
+.filter-card,
+.ticket-panel,
+.admin-profile{
+
+    transition:all .35s ease;
+
+}
+
+.filter-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 15px 35px rgba(0,0,0,.30);
+
+}
+
+.ticket-panel:hover{
+
+    box-shadow:0 20px 45px rgba(0,0,0,.30);
+
+}
+
+.admin-profile:hover{
+
+    transform:translateY(-4px);
+
+}
+
+/* =========================
+   INPUT PLACEHOLDER
+========================= */
+
+input::placeholder{
+
+    color:#94A3B8 !important;
+
+}
+
+/* =========================
+   FOCUS EFFECT
+========================= */
+
+button:focus,
+input:focus,
+select:focus{
+
+    outline:none !important;
+
+}
+
+/* =========================
+   GLASS BORDER
+========================= */
+
+.dashboard-header,
+.search-section,
+.stats-card,
+.filter-card,
+.ticket-panel{
+
+    box-shadow:
+    inset 0 1px rgba(255,255,255,.05),
+    0 15px 35px rgba(0,0,0,.25);
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1200px){
+
+    .dashboard-title{
+
+        font-size:42px;
+
+    }
+
+}
+
+@media(max-width:992px){
+
+    .dashboard-header{
+
+        padding:30px;
+
+    }
+
+    .admin-profile{
+
+        margin-top:30px;
+
+        justify-content:flex-start;
+
+    }
+
+    .stats-card{
+
+        margin-bottom:10px;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .dashboard-title{
+
+        font-size:34px;
+
+    }
+
+    .dashboard-subtitle{
+
+        font-size:15px;
+
+    }
+
+    .search-box .form-control{
+
+        height:54px;
+
+    }
+
+    .new-ticket-btn{
+
+        height:54px;
+
+        margin-top:10px;
+
+    }
+
+    .ticket-panel-header{
+
+        text-align:center;
+
+    }
+
+    .admin-table{
+
+        min-width:900px;
+
+    }
+
+}
+
+@media(max-width:576px){
+
+    .dashboard-wrapper{
+
+        padding:20px 8px 40px;
+
+    }
+
+    .dashboard-header{
+
+        padding:22px;
+
+    }
+
+    .dashboard-title{
+
+        font-size:28px;
+
+    }
+
+    .dashboard-badge{
+
+        font-size:11px;
+
+    }
+
+    .stats-top h2{
+
+        font-size:32px;
+
+    }
+
+    .stats-icon{
+
+        width:58px;
+
+        height:58px;
+
+        font-size:24px;
+
+    }
+
+    .filter-card{
+
+        padding:18px;
+
+    }
+
+    .ticket-panel-header{
+
+        padding:20px;
+
+    }
+
+}
+
+/* =========================
+   PREMIUM GLOW
+========================= */
+
+.stats-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:24px;
+
+    background:linear-gradient(
+        135deg,
+        rgba(255,255,255,.04),
+        transparent 60%
+    );
+
+    pointer-events:none;
+
+}
+
+/* =========================
+   SELECTION
+========================= */
+
+::selection{
+
+    background:#2563EB;
+
+    color:#fff;
+
+}
+
+/* =========================
+   FINAL POLISH
+========================= */
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+.dashboard-wrapper{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+a{
+
+    transition:.3s ease;
+
+}
+
+button{
+
+    transition:.3s ease;
+
+}
+
+.form-control,
+.form-select{
+
+    transition:.3s ease;
+
+}
+/* ==========================
+   ADMIN TICKET DETAIL
+========================== */
+
+.card{
+    border:none;
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 35px rgba(0,0,0,.25);
+}
+
+.card-header{
+    font-weight:700;
+    font-size:20px;
+    padding:16px 22px;
+}
+
+.table th{
+    width:28%;
+    background:#f8f9fa;
+    font-weight:600;
+}
+
+.table td,
+.table th{
+    padding:16px;
+    vertical-align:middle;
+}
+
+.badge{
+    font-size:14px;
+    padding:7px 14px;
+    border-radius:20px;
+}
+
+textarea.form-control{
+    border-radius:14px;
+    resize:none;
+}
+
+.list-group-item{
+    border:none;
+    border-bottom:1px solid #ececec;
+    padding:15px;
+    transition:.25s;
+}
+
+.list-group-item:hover{
+    background:#f8f9ff;
+    transform:translateX(4px);
+}
+
+.progress{
+    height:10px;
+    border-radius:20px;
+}
+
+.progress-bar{
+    border-radius:20px;
+}
+
+.btn{
+    border-radius:12px;
+    font-weight:600;
+}
+
+.btn-primary{
+
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+    border:none;
+
+}
+
+.btn-success{
+
+    background:linear-gradient(90deg,#16a34a,#15803d);
+    border:none;
+
+}
+
+.btn-outline-light{
+
+    border-radius:10px;
+
+}
+
+.table-hover tbody tr:hover{
+
+    background:#f8fbff;
+
+}
+
+.card-body h6{
+
+    font-weight:600;
+
+}
+
+hr{
+
+    opacity:.15;
+
+}

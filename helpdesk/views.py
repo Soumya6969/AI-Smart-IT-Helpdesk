@@ -1,12 +1,30 @@
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import RegisterForm, TicketForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Ticket
-from django.contrib.admin.views.decorators import staff_member_required
 from django.db.models import Q
+
+from .forms import RegisterForm, TicketForm
+from .models import Ticket
+from .services.ai_services import (
+    detect_category,
+    detect_priority,
+    generate_reply
+)
+
+
+# ==========================
+# Admin Access Check
+# ==========================
+
+def admin_required(user):
+    return user.is_authenticated and user.is_superuser
+
+
+# ==========================
+# Home Pages
+# ==========================
 
 def home(request):
     return render(request, "helpdesk/helpdesk.html")
@@ -19,6 +37,11 @@ def about(request):
 def contact(request):
     return render(request, "helpdesk/contact.html")
 
+
+# ==========================
+# Register
+# ==========================
+
 def register(request):
 
     if request.method == "POST":
@@ -27,8 +50,8 @@ def register(request):
 
         if form.is_valid():
 
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
+            username = form.cleaned_data["username"]
+            email = form.cleaned_data["email"]
 
             if User.objects.filter(username=username).exists():
 
@@ -50,45 +73,42 @@ def register(request):
 
                     username=username,
 
-                    first_name=form.cleaned_data['first_name'],
+                    first_name=form.cleaned_data["first_name"],
 
-                    last_name=form.cleaned_data['last_name'],
+                    last_name=form.cleaned_data["last_name"],
 
                     email=email,
 
-                    password=form.cleaned_data['password']
+                    password=form.cleaned_data["password"]
 
                 )
 
                 user.save()
 
                 messages.success(
-
                     request,
-
                     "Registration Successful."
-
                 )
 
-                return redirect('login')
+                return redirect("login")
 
     else:
 
         form = RegisterForm()
 
     return render(
-
         request,
-
         "helpdesk/register.html",
-
         {
-
-            'form': form
-
+            "form": form
         }
-
     )
+
+
+# ==========================
+# Login
+# ==========================
+
 def login_user(request):
 
     if request.method == "POST":
@@ -126,7 +146,11 @@ def login_user(request):
     )
 
 
-@login_required(login_url='login')
+# ==========================
+# Dashboard
+# ==========================
+
+@login_required(login_url="login")
 def dashboard(request):
 
     return render(
@@ -134,7 +158,12 @@ def dashboard(request):
         "helpdesk/dashboard.html"
     )
 
-@login_required(login_url='login')
+
+# ==========================
+# Raise Ticket
+# ==========================
+
+@login_required(login_url="login")
 def raise_ticket(request):
 
     if request.method == "POST":
@@ -147,6 +176,18 @@ def raise_ticket(request):
 
             ticket.user = request.user
 
+            # AI Category Detection
+            ticket.category = detect_category(
+                ticket.subject,
+                ticket.description
+            )
+
+            # AI Priority Detection
+            ticket.priority = detect_priority(
+                ticket.subject,
+                ticket.description
+            )
+
             ticket.save()
 
             messages.success(
@@ -154,7 +195,7 @@ def raise_ticket(request):
                 "Ticket Submitted Successfully."
             )
 
-            return redirect('raise_ticket')
+            return redirect("raise_ticket")
 
     else:
 
@@ -164,15 +205,20 @@ def raise_ticket(request):
         request,
         "helpdesk/raise_ticket.html",
         {
-            'form': form
+            "form": form
         }
     )
-@login_required(login_url='login')
+
+# ==========================
+# My Tickets
+# ==========================
+
+@login_required(login_url="login")
 def my_tickets(request):
 
     tickets = Ticket.objects.filter(
         user=request.user
-    ).order_by('-created_at')
+    ).order_by("-created_at")
 
     return render(
         request,
@@ -181,7 +227,13 @@ def my_tickets(request):
             "tickets": tickets
         }
     )
-@login_required(login_url='login')
+
+
+# ==========================
+# Ticket Detail
+# ==========================
+
+@login_required(login_url="login")
 def ticket_detail(request, ticket_id):
 
     ticket = get_object_or_404(
@@ -197,7 +249,13 @@ def ticket_detail(request, ticket_id):
             "ticket": ticket
         }
     )
-@login_required(login_url='login')
+
+
+# ==========================
+# Edit Ticket
+# ==========================
+
+@login_required(login_url="login")
 def edit_ticket(request, ticket_id):
 
     ticket = get_object_or_404(
@@ -206,7 +264,6 @@ def edit_ticket(request, ticket_id):
         user=request.user
     )
 
-    # Closed ticket edit nahi hoga
     if ticket.status == "Closed":
 
         messages.error(
@@ -254,7 +311,11 @@ def edit_ticket(request, ticket_id):
             "ticket": ticket
         }
     )
-@login_required(login_url='login')
+# ==========================
+# Close Ticket
+# ==========================
+
+@login_required(login_url="login")
 def close_ticket(request, ticket_id):
 
     ticket = get_object_or_404(
@@ -266,7 +327,6 @@ def close_ticket(request, ticket_id):
     if ticket.status != "Closed":
 
         ticket.status = "Closed"
-
         ticket.save()
 
         messages.success(
@@ -278,7 +338,14 @@ def close_ticket(request, ticket_id):
         "ticket_detail",
         ticket_id=ticket.id
     )
-@staff_member_required(login_url='login')
+
+
+# ==========================
+# Admin Dashboard
+# Superuser Only
+# ==========================
+
+@user_passes_test(admin_required, login_url="login")
 def admin_dashboard(request):
 
     search_query = request.GET.get("search", "").strip()
@@ -287,19 +354,27 @@ def admin_dashboard(request):
 
     tickets = Ticket.objects.all().order_by("-created_at")
 
+    # Search
     if search_query:
         tickets = tickets.filter(
             Q(subject__icontains=search_query) |
             Q(user__username__icontains=search_query)
         )
 
+    # Status Filter
     if status_filter:
-        tickets = tickets.filter(status=status_filter)
+        tickets = tickets.filter(
+            status=status_filter
+        )
 
+    # Priority Filter
     if priority_filter:
-        tickets = tickets.filter(priority=priority_filter)
+        tickets = tickets.filter(
+            priority=priority_filter
+        )
 
     context = {
+
         "tickets": tickets,
 
         "search_query": search_query,
@@ -307,9 +382,18 @@ def admin_dashboard(request):
         "priority_filter": priority_filter,
 
         "total_tickets": Ticket.objects.count(),
-        "open_tickets": Ticket.objects.filter(status="Open").count(),
-        "progress_tickets": Ticket.objects.filter(status="In Progress").count(),
-        "closed_tickets": Ticket.objects.filter(status="Closed").count(),
+
+        "open_tickets": Ticket.objects.filter(
+            status="Open"
+        ).count(),
+
+        "progress_tickets": Ticket.objects.filter(
+            status="In Progress"
+        ).count(),
+
+        "closed_tickets": Ticket.objects.filter(
+            status="Closed"
+        ).count(),
     }
 
     return render(
@@ -317,13 +401,30 @@ def admin_dashboard(request):
         "helpdesk/admin_dashboard.html",
         context
     )
-@staff_member_required(login_url='login')
+
+
+# ==========================
+# Admin Ticket Detail
+# Superuser Only
+# ==========================
+
+@user_passes_test(admin_required, login_url="login")
 def admin_ticket_detail(request, ticket_id):
 
     ticket = get_object_or_404(
         Ticket,
         id=ticket_id
     )
+    similar_tickets = Ticket.objects.filter(
+
+    category=ticket.category
+
+).exclude(
+
+    id=ticket.id
+
+).order_by("-created_at")[:5]
+
 
     if request.method == "POST":
 
@@ -341,13 +442,26 @@ def admin_ticket_detail(request, ticket_id):
             ticket_id=ticket.id
         )
 
+    # AI Suggested Reply
+    ai_reply = generate_reply(
+        ticket.subject,
+        ticket.description
+    )
+
     return render(
         request,
         "helpdesk/admin_ticket_detail.html",
         {
-            "ticket": ticket
+            "ticket": ticket,
+            "ai_reply": ai_reply,
+            "similar_tickets": similar_tickets
         }
     )
+
+# ==========================
+# Logout
+# ==========================
+
 def logout_user(request):
 
     logout(request)

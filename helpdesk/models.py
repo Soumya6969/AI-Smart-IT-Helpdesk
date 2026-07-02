@@ -15,7 +15,15 @@ class Ticket(models.Model):
         ('Medium', 'Medium'),
         ('High', 'High'),
     ]
-
+    CATEGORY_CHOICES = [
+        ('Hardware', 'Hardware'),
+        ('Software', 'Software'),
+        ('Network', 'Network'),
+        ('Account', 'Account'),
+        ('Email', 'Email'),
+        ('Security', 'Security'),
+        ('Other', 'Other'),
+    ]
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE
@@ -35,6 +43,11 @@ class Ticket(models.Model):
         max_length=20,
         choices=STATUS_CHOICES,
         default='Open'
+    )
+    category = models.CharField(
+        max_length=50,
+        choices=CATEGORY_CHOICES,
+        default='Other'
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
